@@ -42,6 +42,7 @@ namespace MovieNight.Tests.Test
         {
             var expected = typeof(string);
             Assert.True(expected == sut.Title.GetType());
+            Assert.NotEmpty(sut.Title);
         }
 
         [Fact]
@@ -49,7 +50,16 @@ namespace MovieNight.Tests.Test
         {
             var expected = typeof(EGenre);
             Assert.True(expected == sut.Genre.GetType());
+            Assert.NotEqual(EGenre.None, sut.Genre);
         }
 
+        [Fact]
+        public void Test_CreateMovie()
+        {
+            
+        }
+
+
+        //make a movie, have a title, genre, at least 1 actor, none of the added code should be in make moveie
     }
 }

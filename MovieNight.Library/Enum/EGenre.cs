@@ -6,7 +6,8 @@ namespace MovieNight.Library.Enum
 {
     public enum EGenre
     {
-        Action,
+        None,//default if not labeled
+        Action, 
         Anime,
         Comedy,
         Space_Westerm,

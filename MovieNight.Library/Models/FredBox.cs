@@ -11,7 +11,7 @@ namespace MovieNight.Library.Models
              Movies = new List<Movie>();   
         }
 
-        public List<Movie> Movies
+        private List<Movie> Movies
         {
             get;
             set;
@@ -19,10 +19,40 @@ namespace MovieNight.Library.Models
 
         public Movie MakeMovie(string title)
         {
-            return new Movie()
+            var movie = new Movie();
+            try //try is supposed to look for things that will brek the code
             {
-                Title = title
-            };
+                if (string.IsNullOrWhiteSpace(title))
+                {
+                    throw new ArgumentNullException(title, "title cannot be null or blank"); //creates teh exeption by hand
+                }
+                else
+                {
+                    return new Movie()// crux
+                    {                 // crux
+                        Title = title // crux
+                    };                // crux
+                }
+            }
+            catch(ArgumentNullException ex) //gives the exception to someone else, not my problem
+            {
+                MakeMovie("default"); //swallowing the error
+            }
+            catch (ArgumentException ex)
+            {
+                throw new Exception("not sure how it happened", ex);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally //finally happens regardless of the effors catched
+            {
+                //movie = new Movie(title);
+                 GC.Collect(); 
+               // GC.GetGeneration();
+            }
+            return movie;
         }
 
         public IEnumerable<Movie> GetMovie()

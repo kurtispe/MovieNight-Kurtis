@@ -13,24 +13,59 @@ namespace MovieNight.Library.Models
             get;
             set;
         }
+
+        private string _title;
         public string Title
         {
-            get;
-            set;
+            get
+            {
+                return _title;
+            }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    return;
+                }
+                _title = value;
+            }
         }
+
         public EGenre Genre
         {
             get;
             set;
         }
-        public Movie() // constructor
+       
+
+
+
+        public Movie()
         {
-            Actors = new List<Actor>();
-            {
-                Actors.Add(new Actor());
-            }
-            Title = string.Empty;
-            Genre = EGenre.Spaghetti_Western;
+            Initialize();
+        }
+        public Movie(string title)
+        {
+            Initialize(title); 
+        }
+        public Movie(string title, EGenre genre)
+        {
+            Initialize(genre: genre, title: title);
+        }
+        public Movie(string title, EGenre genre, List<Actor> actors)
+        {
+            Initialize(title, genre, actors);
+        }
+        public void Initialize(
+            string title = "(default title)",
+            EGenre genre = EGenre.Action,
+            List<Actor> actors = null  //new List<Actor>() //{Actors.Add(new Actor())}
+            )
+        {
+            Title = title;
+            Genre = genre;
+            Actors = actors ?? new List<Actor> { new Actor() }; //reference values may not be used as default values as they may not exist at runtime, the compiler will not accept these
+                         //  ^null operator, if the value to the left is null, use the value to the right         
         }
     }
 }
