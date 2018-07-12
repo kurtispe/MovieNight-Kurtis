@@ -20,5 +20,6 @@ namespace MovieNight.Library.Models
                 Movies.Add(new Movie());
             }
         }
+
     }
 }
